@@ -1,0 +1,18 @@
+# secretos y tokens
+.env
+client_secret.json
+youtube_token.json
+tiktok_token.json
+ig_session.json
+*.tmp
+
+# datos generados
+.venv/
+buffer/
+clips/
+tmp/
+logs/
+clips.db*
+clipper.lock
+__pycache__/
+.pytest_cache/

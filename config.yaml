@@ -1,0 +1,44 @@
+twitch_channel: ""        # tu canal de Twitch (vacío = desactivado)
+kick_channel: ""          # tu canal de Kick (vacío = desactivado)
+kick_chatroom_id: null    # opcional: id del chatroom si falla la autodetección
+kick_pusher_key: ""       # chat de Kick: vacío = se pide a Kick sola (recomendado)
+kick_pusher_cluster: us2  # solo se usa si ponés kick_pusher_key a mano
+record_from: twitch       # de cuál plataforma se graba el video: twitch | kick
+
+segment_seconds: 10
+buffer_minutes: 6         # minutos de video guardados en buffer/ (se borran solos)
+clip_pre_seconds: 30      # segundos antes del pico
+clip_post_seconds: 12     # segundos después del pico
+merge_seconds: 20         # dos pedidos más juntos que esto = un solo clip
+
+detector:
+  window_seconds: 10
+  baseline_minutes: 10
+  zscore: 3.0
+  min_msgs: 8             # bajalo si tu chat es chico (ej: 4)
+  cooldown_seconds: 90
+  manual_command: "!clip" # comando de chat para forzar un clip
+  manual_cooldown_seconds: 20
+  manual_users: []        # vacío = cualquiera; ej: [tuusuario, unmod]
+
+language: es
+whisper_model: small      # tiny | base | small | medium (más grande = más lento y preciso)
+claude_model: claude-haiku-5-5
+subtitles: false          # true = quema subtítulos (Whisper) en el video
+ffmpeg_path: ""           # vacío = buscar en el PATH; si no, carpeta bin de ffmpeg
+
+panel:
+  enabled: true
+  port: 8787              # http://127.0.0.1:8787 (solo accesible desde esta PC)
+
+upload:
+  platforms: [youtube, tiktok, instagram]
+  require_approval: false # true = nada se sube sin aprobarlo en el panel
+  max_per_day_per_platform: 6
+  min_gap_minutes: 90     # separación mínima entre subidas a la misma plataforma
+  retry_minutes: 15       # espera después de un error
+  max_attempts: 3         # intentos por clip y plataforma
+  min_score: 6            # calidad mínima para subir (en modo aprobación no se usa)
+  youtube_privacy: public # public | unlisted | private
+  youtube_category_id: "20"  # 20 = Gaming
+  tiktok_privacy: SELF_ONLY  # SELF_ONLY hasta que TikTok audite tu app; después PUBLIC_TO_EVERYONE
